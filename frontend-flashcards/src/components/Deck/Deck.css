@@ -1,4 +1,4 @@
-.decklist{
+.name-of-the-Deck{
     padding: 30px;
     max-width: 3000px;
     margin: 0 0 0 auto;
@@ -8,7 +8,7 @@
     min-height: 100vh;
     width: 160%;
 }
-.decklist-header{
+.name-of-the-Deck-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,15 +16,14 @@
     padding-bottom: 16px;
     border-bottom: 1px solid #fdf6f3
 }
-.decklist-header h2{
+.name-of-the-Deck-header h2{
     font-size: 28px;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
     color: #0d0501;
     margin: 0;
 }
-
-.create-a-deck{
+.create-a-flashcard{
     padding: 10px 20px;
     background-color: #72c3fe;
     color: white;
@@ -35,37 +34,28 @@
     font-weight: 600;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(114, 195, 254, 0.3);
-    position:relative;
+    position: relative;
     left: 800px;
-    min-width: 140px; /* Minimum width */
-    width: auto; /* Allow it to grow with content */
-    max-width: 200px; /* Maximum width */
+    
 }
 
-.create-a-deck:hover{
+.flash-containter{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.create-a-flashcard:hover{
     background-color: #5aa9e6;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(114, 195, 254, 0.4);
 }
 
-.create-a-deck:active{
+.create-a-flashcard:active{
     transform: translateY(0);
 }
-
-/* .deck-container-wrap{
-    background-color: red;
-    display: flex;
-    flex-direction: row;
-} */
-.deck-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    gap: 12px;
-    display: flex;
-    flex-direction: row;
-}
-
-.deck-card{
+.flashcard-card{
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 24px;
@@ -74,17 +64,17 @@
     background-color: #fff;
     position: relative;
     overflow: hidden;
-    width: 15%;
-    height: 180px;
+    width: 30%;
+    height: 200px;
 }
 
-.deck-card:hover{
+.flashcard-card:hover{
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     transform: translateY(-4px);
     border-color: #cbd5e0;
 }
 
-.deck-card::before{
+.flashcard-card::before{
     content: '';
     position: absolute;
     top: 0;
@@ -96,48 +86,25 @@
     transition: opacity 0.3s ease;
 }
 
-.deck-card:hover::before{
+.flashcard-card:hover::before{
     opacity: 1;
 }
-
-.deck-content{
+.flashcard-content{
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    height:100%;
-}   
-
-.deck-tilte{
-    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+.flashcard-question{
+    font-size: 20px;
     font-weight: 600;
-    color: #0d0501;
-    line-height: 1.4;
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    color: #333;
+    margin-bottom: 12px;
 }
-
-.deck-description{
-    font-size: 12px;
-    color: #0d0501;
-    line-height: 1.5;
-    flex-grow: 1;
+.flashcard-answer{
+    font-size: 16px;
+    color: #666;
     margin: 0;
-}
-.deck-meta {
-    /* display: flex; */
-    justify-content: space-between;
-    align-items:end;
-    margin-top: auto;
-  }
-
-.deck-card-count{
-    font-size: 12px;
-    color: #0d0501;
-    font-weight: 500;
-    text-align: right;
-    padding: 4px 12px;
-    border-radius: 16px;
 }
