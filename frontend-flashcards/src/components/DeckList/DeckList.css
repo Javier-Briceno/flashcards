@@ -141,3 +141,14 @@
     padding: 4px 12px;
     border-radius: 16px;
 }
+
+deck-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+  }
+  
+  .deck-link:hover {
+    text-decoration: none;
+  }
