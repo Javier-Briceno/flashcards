@@ -1,6 +1,7 @@
 import { useState } from 'react'
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import './App.css'
 import { sampleDecks } from './data/sampleData'
 import DeckList from './components/DeckList'
@@ -35,61 +36,82 @@ import type { Flashcard } from './components/Deck'
 //   )
 // }
 function App(){
-    const[decks, setDecks] = useState<Deck[]>(sampleDecks);
-    const handleSelectDeck = (deckId: string) =>{
-      console.log('Selected deck:', deckId);
-
-    };
-    const handleCreateDeck = () =>{
-      console.log('Create a new deck');
-    }
-
-
-    const [flashcards, setFlashcards] = useState<Flashcard[]>(sampleDeck);
-    const handleSelectFlashcard = (flashcardId: string) =>{
-      console.log('Selected flashcard:', flashcardId);
-    };
-    const handleCreateFlashcard = () =>{
-      console.log('Create a new flashcard');
-    }
-
-
-    const [currentView, setCurrentView] = useState<'decks' | 'flashcards'>('decks');
-    const switchToDecks = () => setCurrentView('decks');
-    const switchToFlashcards = () => setCurrentView('flashcards');
-    return (
-      <div className = 'App'>
-        <div className="view-switcher">
-        <button 
-          onClick={switchToDecks}
-          className={currentView === 'decks' ? 'active' : ''}
-        >
-          My Decks
-        </button>
-        <button 
-          onClick={switchToFlashcards}
-          className={currentView === 'flashcards' ? 'active' : ''}
-        >
-          My Flashcards
-        </button>
+  return (
+    <Router>
+      <div className="App">
+      <Routes>
+        <Route path = "/" element = {<HomePage/>}/>
+        <Route path = "/decks" element = {<Library/>}/>
+        <Route path = "/decks/:deckId" element = {<Deck/>}/>
+      </Routes>
       </div>
+    </Router>
+  )
+}
 
-      {/* Conditional rendering */}
-      {currentView === 'decks' ? (
+function HomePage(){
+  return (
+    <div>
+      <h1>Pink Vogel</h1>
+      <nav>
+        <Link to = "/decks">View Library</Link>
+      </nav>
+    </div>
+  )
+}
+
+function Library(){
+  const[decks, setDecks] = useState<Deck[]>(sampleDecks);
+  const handleSelectDeck = (deckId: string) =>{
+    console.log('Selected deck:', deckId);
+
+  };
+  const handleCreateDeck = () =>{
+    console.log('Create a new deck');
+  }
+  return (
+    <div>
+      <nav>
+        <Link to ="/">Back to Home</Link>
         <DeckList
-          decks={decks}
-          onCreateDeck={handleCreateDeck}
+          decks = {decks}
+          onCreateDeck = {handleCreateDeck}
           onSelectDeck={handleSelectDeck}
         />
-      ) : (
-        <FlashcardList
+      </nav>
+    </div>
+  )
+}
+
+function Deck(){
+  const {deckId} = useParams();
+  const [flashcards, setFlashcards] = useState<Flashcard[]>(sampleDeck);
+  
+  //find the current deck based on the deckId from the sampleDecks
+  const currentDeck = sampleDecks.find(deck => deck.id === deckId);
+  const handleSelectFlashcard = (flashcardId: string) =>{
+    console.log('Selected flashcard:', flashcardId);
+  };
+  const handleCreateFlashcard = () =>{
+    console.log('Create a new flashcard');
+  }
+  return (
+    <div>
+      <nav>
+        <Link to ="/decks">Back to Library</Link>
+      </nav>
+      {currentDeck && (
+        <div className="deck-header">
+          <h2>{currentDeck.title}</h2>
+          <p>{currentDeck.description}</p>
+        </div>
+      )}
+      <FlashcardList
           flashcards={flashcards}
           onCreateFlashcard={handleCreateFlashcard}
           onSelectFlashcard={handleSelectFlashcard}
         />
-      )}
-      </div>
-    );
-
-  }
+    </div>
+  )
+}
 export default App

@@ -1,4 +1,5 @@
 import './DeckList.css';
+import { Link } from 'react-router-dom';
 export interface Deck{
     id: string;
     title: string;
@@ -25,6 +26,7 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
                         className = 'deck-card'
                         onClick = {() => onSelectDeck(deck.id)}
                     >
+                        <Link to = {`/decks/${deck.id}`} className = "deck-link">
                         <div className = "deck-content">
                             <h3 className = "deck-title">{deck.title}</h3>
                             <p className = "deck-description">{deck.description}</p>
@@ -32,6 +34,7 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
                               <p className = "deck-card-count">{deck.cardCount} cards</p>
                             </div>
                         </div>
+                        </Link>
                     </div>
                 ))}
             </div>
