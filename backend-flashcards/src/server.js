@@ -5,6 +5,8 @@ const cors = require('cors'); // import the cors module (CORS lets your browser-
 const errorHandler = require('./middleware/errorHandler') // errorHandler: a central place to turn thrown errors into nice JSON responses
 const validate = require('./middleware/validate') // validate: a tiny helper to check inputs and fail early with a clean error  
 
+const decksRoutes = require('./routes/decks.routes') // Import the router that contains all "deck" endpoints
+
 const app = express(); // create an express application
 
 // parse JSON request bodies
@@ -19,6 +21,10 @@ const allowed = (process.env.CORS_ORIGIN || '') // get allowed origins from env 
 app.use(cors({ // enable CORS
     origin: allowed.length ? allowed : true // if no origins are specified, allow all origins
 }))
+
+// Mount the decks router under the "/decks" base path.
+// Everything defined as "/" inside decks.routes.js becomes "/decks" here.
+app.use('/decks', decksRoutes);
 
 app.get('/health', (req, res) => { // health check endpoint
     res.json({ 'ok': true, 'time': new Date().toISOString() }); // respond with a JSON object containing the current time
