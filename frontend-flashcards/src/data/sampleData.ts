@@ -22,6 +22,7 @@ export const sampleDeck: Flashcard[] = [
         id: 1,
         question: 'What is Machine Learning?',
         answer: 'Machine Learning is a subset of artificial intelligence that focuses on the development of algorithms that allow computers to learn from and make predictions or decisions based on data.',
-        belongsToDeck: 'Introduction to Machine Learning'
+        belongsToDeck: 'Introduction to Machine Learning',
+        belongsToDeckId: '1'
     }
 ]

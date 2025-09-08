@@ -4,4 +4,5 @@ export interface Flashcard{
     question: string;
     answer: string;
     belongsToDeck: string;
+    belongsToDeckId: string;
 }

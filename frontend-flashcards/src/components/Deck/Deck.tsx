@@ -4,6 +4,7 @@ export interface Flashcard{
     question: string;
     answer: string;
     belongsToDeck: string;
+    belongsToDeckId: string;
 }
 //props interface with three properties where flashcards is an array of Flashcard type with onSelectFlashcard and onCreateFlashcard as functions
 interface DeckProps{   

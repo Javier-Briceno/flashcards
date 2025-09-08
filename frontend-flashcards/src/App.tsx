@@ -66,9 +66,21 @@ function Library(){
     console.log('Selected deck:', deckId);
 
   };
-  const handleCreateDeck = () =>{
-    console.log('Create a new deck');
-  }
+  // const handleCreateDeck = () =>{
+  //   console.log('Create a new deck');
+  // }
+  const handleCreateDeck = (deckData: { title: string; category: string; description: string }) => {
+    const newDeck: Deck = {
+      id: Date.now().toString(), // Generate unique ID
+      title: deckData.title,
+      description: deckData.description,
+      category: deckData.category,
+      cardCount: 0 // Start with 0 cards
+    };
+    
+    setDecks([...decks, newDeck]);
+    console.log('Created new deck:', newDeck);
+  };
   return (
     <div>
       <nav>

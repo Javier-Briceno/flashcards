@@ -4,5 +4,6 @@ export interface Deck{
     title: string;
     description: string;
     cardCount: number;
+    category?: string; 
 }
 
