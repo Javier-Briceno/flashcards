@@ -136,9 +136,100 @@ async function getDeckWithChildrenAndCards(deckId) {
     };
 }
 
+// updates a deck by id
+// any of {name, category parent_deck_id} may be provided
+async function updateDeck(deckId, { name, category, parent_deck_id }) {
+    // convert deckId to a number and validates it
+    const id = Number(deckId);
+    if (!Number.isFinite(id)) {
+        const err = new Error('id must be a number');
+        err.statusCode = 400;
+        err.code = 'BAD_REQUEST';
+        throw err;
+    }
+
+    // check the deck exists (useful if no fields are being updated)
+    const d = await query('SELECT * FROM deck WHERE deck_id = $1', [id]);
+    if (d.rowCount === 0) {
+        const err = new Error('deck was not found');
+        err.statusCode = 404;
+        err.code = 'NOT_FOUND';
+        throw err;
+    }
+
+    // Prevent setting a deck as its own parent
+    if (parent_deck_id !== undefined && parent_deck_id !== null && Number(parent_deck_id) === id) {
+        const err = new Error('parent_deck_id cannot be the same as deckId');
+        err.statusCode = 400;
+        err.code = 'BAD_REQUEST';
+        throw err;
+    }
+
+    // build a dynamic UPDATE statement with only the fields that were actually provided
+    const fields = [];
+    const values = [];
+    let i = 1;
+
+    // Update "name" only if the caller sent it
+    if (name !== undefined) {
+        fields.push(`name = $${i++}`);
+        values.push(name);
+    }
+    // Update "category" only if provided.
+    if (category !== undefined) {
+        fields.push(`category = $${i++}`);
+        values.push(category);
+    }
+    // Update "parent_deck_id" only if provided.
+    if (parent_deck_id !== undefined) {
+        fields.push(`parent_deck_id = $${i++}`);
+        values.push(parent_deck_id);
+    }
+
+    // If no fields were provided, just return the current row (no-op update).
+    if (!fields.length) {
+        return d.rows[0];
+    }
+    // For the update path, append the WHERE id as the last parameter.
+    values.push(id);
+
+    // Perform the UPDATE only for the fields provided, and return the updated row
+    const { rows } = await query(
+        `UPDATE deck SET ${fields.join(', ')} WHERE deck_id = $${i} RETURNING *`,
+        values
+    );
+
+    // If UPDATE affected 0 rows, the deck didn't exist (race condition or bad id).
+    if (!rows.length) {
+        const err = new Error('Deck not found');
+        err.statusCode = 404;
+        err.code = 'NOT_FOUND';
+        throw err;
+    }
+
+    // All good: return the updated row.
+    return rows[0];
+}
+
+async function deleteDeckRecursive(deckId) {
+    const id = Number(deckId);
+    // ON DELETE CASCADE (schema) will remove subdecks & flashcards automatically
+    const result = await query('DELETE FROM deck WHERE deck_id = $1', [id]);
+    // result.rowCount === 0 → not found
+    if (result.rowCount === 0) {
+        const err = new Error('Deck not found');
+        err.statusCode = 404;
+        err.code = 'NOT_FOUND';
+        throw err;
+    }
+    return { ok: true }
+}
+
 // Export the service functions so routes/controllers can use them.
 module.exports = {
     listDecks,
     createDeck,
     getDeckWithChildrenAndCards,
+    updateDeck,
+    deleteDeckRecursive,
 };
