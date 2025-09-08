@@ -92,5 +92,36 @@ router.get('/:deckId', async (req, res, next) => {
     }
 });
 
+// PUT /decks/:deckId  (rename, change category/parent)
+router.put(
+    '/:deckId',
+    validate(req => {
+        const body = req.body || {};
+        if (
+            body.name === undefined &&
+            body.category === undefined &&
+            body.parent_deck_id === undefined
+        ) throw new Error('At least one field is required (name, category, parent_deck_id)');
+    }),
+    async (req, res, next) => {
+        try {
+            const updated = await DeckService.updateDeck(req.params.deckId, req.body);
+            res.json(updated);
+        } catch (err) {
+            next(err);
+        }
+    }
+);
+
+// DELETE /decks/:deckId  (cascade delete subdecks + flashcards)
+router.delete('/:deckId', async (req, res, next) => {
+    try {
+        const out = await DeckService.deleteDeckRecursive(req.params.deckId);
+        res.json(out);
+    } catch (err) {
+        next(err);
+    }
+});
+
 // Export the router so server.js can mount it with app.use('/decks', router)
 module.exports = router;
