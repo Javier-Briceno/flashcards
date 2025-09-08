@@ -1,0 +1,152 @@
+.barOption {
+  /* sizing */
+  width: 100%;
+  height: 50px;
+
+  /* offsets */
+  margin-bottom: 30px;
+  line-height: 50px;
+}
+
+
+
+.textOption {
+  /* nature */
+  display: inline;
+  position: relative;
+  z-index: 2;
+
+  /* offsets */
+  left: 70px;
+
+  /* decor */
+  color: var(--bright);
+  font-size: 24px;
+  transition: 0.1s linear;
+}
+
+.barOption:hover .textOption {
+  /* decor */
+  color: var(--dark);
+  font-size: 26px;
+}
+
+
+
+.iconOption {
+  /* nature */
+  position: relative;
+  z-index: 2;
+
+  /* sizing */
+  width: 35px;
+  height: 35px;
+
+  /* offsets */
+  top: 7.5px;
+  left: 55px;
+  
+  /* decor */
+  filter: invert(100%);
+  transition: 0.1s linear;
+}
+
+.barOption:hover .iconOption {
+  /* decor */
+  filter: invert(0%)
+}
+
+
+
+.fancyTab {
+  /* nature */
+  position: relative;
+  z-index: 1;
+
+  /* sizing */
+  width: 0px;
+  height: 80px;
+
+  /* offsets */
+  left: 300px;
+  bottom: 69px;
+
+  /* decor */
+  background-color: var(--bright);
+  box-shadow: inset 10px 0 5px -5px hsla(0,0%,0%,.25);
+  border-radius: 20px 0 0 20px;
+  transition: 0.1s linear;
+}
+
+.barOption:hover .fancyTab {
+  /* sizing */
+  width: 285px;
+
+  /* offsets */
+  left: 15px;
+}
+
+.barOption:hover .fancyCorner {
+  /* sizing */
+  width: 20px;
+
+  /* offsets */
+  left: 280px;
+}
+
+.fancyCorner {
+  /* nature */
+  position: relative;
+
+  /* sizing */
+  width: 0px;
+  height: 120px;
+
+  /* offsets */
+  left: 300px;
+  bottom: 169px;
+
+  /* decor */
+  background-color: var(--bright);
+  transition: 0.1s linear;
+}
+
+.barOption:hover .fancyCover {
+    /* sizing */
+    width: 20px;
+    
+    /* offsets */
+    left: 280px;
+}
+
+.fancyCover {
+  /* nature */
+  position: relative;
+  background-color: var(--primary);
+
+  /* sizing */
+  width: 0px;
+  height: 20px;
+
+  /* offsets */
+  left: 300px;
+
+  /* decor */
+  transition: 0.1s linear;
+}
+
+.cov1 {
+  /* offsets */
+  bottom: 189px;
+
+  /* decor */
+  border-radius: 0 20px 0 0;
+}
+
+.cov2 {
+  /* offsets */
+  bottom: 309px;
+
+  /* decor */
+  border-radius: 0 0 20px 0;
+}

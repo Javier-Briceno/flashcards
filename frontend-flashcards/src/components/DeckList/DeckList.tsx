@@ -54,7 +54,6 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
     return (
         <div className = 'decklist'>
             {/* Header section with title and create button */}
-            <div className = 'decklist-header'></div>
             <h2>My Decks</h2>
             {/* Button to open the create deck modal */}
             <button onClick = {handleCreateDeck} className = "create-a-deck">
