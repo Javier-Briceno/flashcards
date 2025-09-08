@@ -95,8 +95,8 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
                                 <input
                                     type="text"
                                     id="deck-name"
-                                    value={newDeckName}
-                                    onChange={(e) => setNewDeckName(e.target.value)} //Update state on input change
+                                    //value={newDeckName}
+                                    //onChange={(e) => setNewDeckName(e.target.value)} //Update state on input change
                                     placeholder="Enter deck name"
                                     required
                                     autoFocus
@@ -109,8 +109,8 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
                                 <input
                                     type="text"
                                     id="deck-category"
-                                    value={newDeckCategory}
-                                    onChange={(e) => setNewDeckCategory(e.target.value)}
+                                    //value={newDeckCategory}
+                                    //onChange={(e) => setNewDeckCategory(e.target.value)}
                                     placeholder="Enter category (optional)"
                                 />
                             </div>
@@ -120,8 +120,8 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
                                 <label htmlFor="deck-description">Description</label>
                                 <textarea
                                     id="deck-description"
-                                    value={newDeckDescription}
-                                    onChange={(e) => setNewDeckDescription(e.target.value)}
+                                    //value={newDeckDescription}
+                                    //onChange={(e) => setNewDeckDescription(e.target.value)}
                                     placeholder="Enter description (optional)"
                                     rows={3} // Set initial visible rows
                                 />
