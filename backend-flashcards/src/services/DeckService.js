@@ -98,8 +98,47 @@ async function createDeck({ name, category = null, parent_deck_id = null }) {
     return rows[0];
 }
 
+/**
+ * Get one deck (by id) together with:
+ *  - its direct child decks (subdecks)
+ *  - its flashcards
+ */
+async function getDeckWithChildrenAndCards(deckId) {
+    const id = Number(deckId); // Convert the incoming id to a Number (URLs are strings by default).
+    if (!Number.isFinite(id)) { // Basic validation: reject values like "abc" or NaN.
+        const err = new Error('id must be a number');
+        err.statusCode = 400; 
+        err.code = 'BAD_REQUEST';
+        throw err;
+    }
+    // Fetch the deck itself.
+    // Note: "$1" is a placeholder; `[id]` is the array of values to plug in.
+    // This *parameterized query* helps prevent SQL injection.
+    const d = await query('SELECT * FROM deck WHERE deck_id = $1', [id]);
+    if (d.rowCount === 0) { // If no deck was found, tell the client (404 Not Found).
+        const err = new Error('deck not found');
+        err.statusCode = 404;
+        err.code = 'NOT_FOUND';
+        throw err;
+    }
+
+    // Fetch direct child decks (subdecks) of this deck.
+    const subdecks = await query('SELECT * FROM deck WHERE parent_deck_id = $1 ORDER BY created_at DESC', [id]);
+
+    // Fetch all flashcards that belong to this deck.
+    const flashcards = await query('SELECT * FROM flashcard WHERE deck_id = $1 ORDER BY created_at DESC', [id]);
+
+    // Return a single combined object that the route can send as JSON.
+    return {
+        deck: d.rows[0], // the one deck row we found above
+        subdecks: subdecks.rows,
+        flashcards: flashcards.rows,
+    };
+}
+
 // Export the service functions so routes/controllers can use them.
 module.exports = {
     listDecks,
     createDeck,
+    getDeckWithChildrenAndCards,
 };

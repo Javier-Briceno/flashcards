@@ -74,5 +74,23 @@ router.post(
     }
 );
 
+// Route: GET /decks/:deckId
+// Return ONE deck by its id, plus its direct subdecks and its flashcards.
+router.get('/:deckId', async (req, res, next) => {
+    // Express hands us three things:
+    // - req:  the incoming HTTP request (URL, params, body, etc.)
+    // - res:  the HTTP response we will send back
+    // - next: a function to pass errors to the global error handler
+
+    try {
+        const data = await DeckService.getDeckWithChildrenAndCards(req.params.deckId); // req.params contains the dynamic parts of the URL.
+        res.json(data); // Send the result back to the client as JSON.
+    } catch (err) {
+        // If anything throws (e.g., deck not found, bad id, DB error),
+        // pass the error to Express' error handler middleware.
+        next(err);
+    }
+});
+
 // Export the router so server.js can mount it with app.use('/decks', router)
 module.exports = router;
