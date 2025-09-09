@@ -1,11 +1,11 @@
 .name-of-the-Deck{
     padding: 30px;
-    width: 1000px;
-    margin: 0 0 0 auto;
+    width: calc(100% - 300px);
+    float: right;
+    margin: 0;
+    padding: 0;
     background-color: #fdf6f3;
-    position: relative;
-    left:250px;
-    height: 400px;
+    height: 50vh;
 }
 .name-of-the-Deck-header{
     display: flex;
@@ -58,6 +58,7 @@
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 24px;
+    margin: 40px auto 0;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     transition: box-shadow 0.3s ease;
     background-color: #fff;

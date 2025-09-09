@@ -12,22 +12,22 @@ function NavOption({ destination }: NavOptionProps) {
       case '':
         return (
           <>
-            <img src={LibraryIcon} className="iconOption" />
-            <div className="textOption">Home</div>
+            <img src={LibraryIcon} className="icon-option" />
+            <div className="text-option">Home</div>
           </>
         );
       case 'decks':
         return (
           <>
-            <img src={LibraryIcon} className="iconOption" />
-            <div className="textOption">Library</div>
+            <img src={LibraryIcon} className="icon-option" />
+            <div className="text-option">Library</div>
           </>
         );
       default:
         return (
           <>
-            <img src={LibraryIcon} className="iconOption" />
-            <div className="textOption">Unknown</div>
+            <img src={LibraryIcon} className="icon-option" />
+            <div className="text-option">Unknown</div>
           </>
         );
     }
@@ -35,12 +35,12 @@ function NavOption({ destination }: NavOptionProps) {
 
   return (
     <Link to = {"/" + destination}>
-      <div className="barOption">
+      <div className="bar-option">
         {renderContent()}
-        <div className="fancyTab"></div>
-        <div className="fancyCorner"></div>
-        <div className="fancyCover cov1"></div>
-        <div className="fancyCover cov2"></div>
+        <div className="fancy-tab"></div>
+        <div className="fancy-corner"></div>
+        <div className="fancy-cover cov-bottom"></div>
+        <div className="fancy-cover cov-top"></div>
       </div>
     </Link>
     )

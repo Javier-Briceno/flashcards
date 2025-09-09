@@ -4,7 +4,7 @@ import './NavBar.css'
 
 function NavBar() {
     return(
-        <div className="navBar">
+        <div className="navbar">
         <img src={Logo} id="logo"/>
         <NavOption destination=''/>
         <NavOption destination='decks'/>

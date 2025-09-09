@@ -53,12 +53,13 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
 
     return (
         <div className = 'decklist'>
-            {/* Header section with title and create button */}
-            <h2>My Decks</h2>
-            {/* Button to open the create deck modal */}
-            <button onClick = {handleCreateDeck} className = "create-a-deck">
-                + Create a new Deck
-            </button>
+            <div className='decklist-header'>
+                <h2>My Decks</h2>
+                {/* Button to open the create deck modal */}
+                <button onClick = {handleCreateDeck} className = "create-a-deck">
+                    + Create a new Deck
+                </button>
+            </div>
             {/* Container for all the deck cards */}
             <div className = 'deck-container'>
                 {decks.map(deck => (
@@ -80,6 +81,7 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
                     </div>
                 ))}
             </div>
+
             {/* Modal for creating a new deck */}
             {isModalOpen &&(
                 //Overlay that covers the entire screen

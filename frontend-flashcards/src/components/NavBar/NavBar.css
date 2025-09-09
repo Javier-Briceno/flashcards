@@ -1,7 +1,6 @@
-.navBar {
+.navbar {
   /* sizing */
-  width: 15.625%;
-  min-width: 300px;
+  width: 300px;
   height: 100%;
   box-sizing: border-box;
 

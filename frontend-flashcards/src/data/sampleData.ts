@@ -14,6 +14,30 @@ export const sampleDecks: Deck[] = [
         title: 'Einfuerung in Complex Intelligence und Software System',
         description: 'About the complex intelligence and software systems',
         cardCount:30
+    },
+    {
+        id: '3',
+        title: 'Introduction to Machine Learning',
+        description: 'About the machine learning concepts and algorithms',
+        cardCount: 10
+    },
+    {
+        id: '4',
+        title: 'Einfuerung in Complex Intelligence und Software System',
+        description: 'About the complex intelligence and software systems',
+        cardCount:30
+    },
+    {
+        id: '5',
+        title: 'Introduction to Machine Learning',
+        description: 'About the machinfgxgv fxg bgfxg bgfb dgfbdfgb CXS Zzd  cdsdCDKHAu cblduhjaVBuudav hzbd khjA BDChkjc bdavjh vdVHJ bc jhkd Vhdkfajvbhkjda vkhjc cbhjkdv bdshkav jahbdvjkhdbvkjhbdvfajhdfsvb jdfhvbjkdhvf bdfkjvhbdfvljhbdfvf,kjzhb vkjaHdvbk,dvjhb dvf kjdhfvbe learning concepts and algorithms',
+        cardCount: 10
+    },
+    {
+        id: '6',
+        title: 'Einfuerung in Complex Intelligence und Software System',
+        description: 'About the complex intelligence and software systems',
+        cardCount:30
     }
 ]
 
