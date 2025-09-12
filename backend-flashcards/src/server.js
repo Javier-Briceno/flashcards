@@ -6,6 +6,8 @@ const errorHandler = require('./middleware/errorHandler') // errorHandler: a cen
 const validate = require('./middleware/validate') // validate: a tiny helper to check inputs and fail early with a clean error  
 
 const decksRoutes = require('./routes/decks.routes') // Import the router that contains all "deck" endpoints
+const flashcardsRoutes = require('./routes/flashcards.routes');
+const learnRoutes = require('./routes/learn.routes');
 
 const app = express(); // create an express application
 
@@ -19,12 +21,16 @@ const allowed = (process.env.CORS_ORIGIN || '') // get allowed origins from env 
     .filter(Boolean); // filter out empty strings
 
 app.use(cors({ // enable CORS
-    origin: allowed.length ? allowed : true // if no origins are specified, allow all origins
+    origin: 'http://localhost:5173', // Allow requests from the frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+    credentials: true // Allow cookies if needed
 }))
 
 // Mount the decks router under the "/decks" base path.
 // Everything defined as "/" inside decks.routes.js becomes "/decks" here.
 app.use('/decks', decksRoutes);
+app.use('/flashcards', flashcardsRoutes);
+app.use('/decks', learnRoutes);
 
 app.get('/health', (req, res) => { // health check endpoint
     res.json({ 'ok': true, 'time': new Date().toISOString() }); // respond with a JSON object containing the current time
