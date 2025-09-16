@@ -2,6 +2,7 @@
 const express = require('express'); // the web framework handling HTTP routing.
 const validate = require('../middleware/validate'); // custom middleware to validate requests (throws if invalid).
 const DeckService = require('../services/DeckService'); // the "business logic" layer that talks to the database.
+const FlashcardService = require('../services/FlashcardService'); // Import the business logic for flashcards
 
 // Create a new router instance.
 // A router groups related endpoints under a common path (mounted later as /decks in server.js).
@@ -122,6 +123,21 @@ router.delete('/:deckId', async (req, res, next) => {
         next(err);
     }
 });
+
+// Create a flashcard inside a specific deck
+router.post(
+  '/:deckId/flashcards', // URL with deckId as a path parameter
+  validate(req => { // Validate required fields before hitting the service
+    const { front, back } = req.body || {}; // Read body fields
+    if (!front || !back) throw new Error('front and back are required'); // Enforce required fields
+  }),
+  async (req, res, next) => { // Async handler to create the flashcard
+    try {
+      const card = await FlashcardService.createFlashcard(req.params.deckId, req.body); // Call service with deckId and payload
+      res.status(201).json(card); // Return created card with HTTP 201
+    } catch (err) { next(err); } // Delegate errors to the error handler middleware
+  }
+);
 
 // Export the router so server.js can mount it with app.use('/decks', router)
 module.exports = router;
