@@ -71,17 +71,12 @@ function Deck(){
   }
   return (
     <div>
-      {currentDeck && (
-        <div className="deck-header">
-          <h2>{currentDeck.title}</h2>
-          <p>{currentDeck.description}</p>
-        </div>
-      )}
       <FlashcardList
-          flashcards={flashcards}
-          onCreateFlashcard={handleCreateFlashcard}
-          onSelectFlashcard={handleSelectFlashcard}
-        />
+        currentDeck={currentDeck!}
+        flashcards={flashcards}
+        onCreateFlashcard={handleCreateFlashcard}
+        onSelectFlashcard={handleSelectFlashcard}
+      />
     </div>
   )
 }

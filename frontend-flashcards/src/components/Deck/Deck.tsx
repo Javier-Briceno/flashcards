@@ -1,3 +1,4 @@
+import type { Deck } from '../DeckList';
 import './Deck.css';  // Importing CSS for styling
 export interface Flashcard{   
     id: number;
@@ -7,19 +8,27 @@ export interface Flashcard{
     belongsToDeckId: string;
 }
 //props interface with three properties where flashcards is an array of Flashcard type with onSelectFlashcard and onCreateFlashcard as functions
-interface DeckProps{   
+interface DeckProps {  
+    currentDeck: Deck;
     flashcards: Flashcard[];
     onSelectFlashcard:(FlashcardId: string) => void;
     onCreateFlashcard: () => void;
 }
 
-const FlashCardList = ({flashcards, onSelectFlashcard, onCreateFlashcard}: DeckProps)=>{  
+const FlashCardList = ({currentDeck, flashcards, onSelectFlashcard, onCreateFlashcard}: DeckProps) => {  
     return (
-        //form of the deck with a button to create a new flashcard and a container to display the flashcards
-        <div className ='name-of-the-Deck'>                                                                 
-                <h2>{flashcards.length > 0 ? flashcards[0].belongsToDeck : 'No Deck Name'}</h2>
-                <button onClick = {onCreateFlashcard} className = 'create-a-flashcard'>Create a new Flashcard</button>
-            
+        <>
+            <div className = 'name-of-the-Deck'> 
+                <div className="deck-header">
+                    <h2>{currentDeck.title}</h2>
+                    <p>{currentDeck.description}</p>
+                </div> 
+                <div className = 'deck-actions'>
+                    <div className = 'searchbar'>Search flashcard...</div>
+                    <button className = 'start-learning'> Start Learning </button>
+                    <button onClick = {onCreateFlashcard} className = 'create-a-flashcard'>Create a new Flashcard</button>
+                </div>   
+            </div>
             <div className = 'flashcard-container'>
                 {flashcards.map(flashcard =>(
                     <div
@@ -34,8 +43,7 @@ const FlashCardList = ({flashcards, onSelectFlashcard, onCreateFlashcard}: DeckP
                     </div>
                 ))}
             </div>
-        </div>
-
+        </>
     )
 }
 //exporting the FlashCardList component as the default export

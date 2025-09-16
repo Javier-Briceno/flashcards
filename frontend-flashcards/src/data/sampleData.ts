@@ -17,7 +17,7 @@ export const sampleDecks: Deck[] = [
     },
     {
         id: '3',
-        title: 'Introduction to Machine Learning',
+        title: 'Introduction to Machine Learning jh iueawdhn iuewfahbiuewab fgiuea fb gaufyvbayif gbeaufcv',
         description: 'About the machine learning concepts and algorithms',
         cardCount: 10
     },
@@ -29,7 +29,7 @@ export const sampleDecks: Deck[] = [
     },
     {
         id: '5',
-        title: 'Introduction to Machine Learning',
+        title: 'Introduction to Machine Learning jh iueawdhn iuewfahbiuewab fgiuea fb gaufyvbayif gbeaufcvbu cyv adcuY gbsd ewad fgvss',
         description: 'About the machinfgxgv fxg bgfxg bgfb dgfbdfgb CXS Zzd  cdsdCDKHAu cblduhjaVBuudav hzbd khjA BDChkjc bdavjh vdVHJ bc jhkd Vhdkfajvbhkjda vkhjc cbhjkdv bdshkav jahbdvjkhdbvkjhbdvfajhdfsvb jdfhvbjkdhvf bdfkjvhbdfvljhbdfvf,kjzhb vkjaHdvbk,dvjhb dvf kjdhfvbe learning concepts and algorithms',
         cardCount: 10
     },
@@ -48,5 +48,26 @@ export const sampleDeck: Flashcard[] = [
         answer: 'Machine Learning is a subset of artificial intelligence that focuses on the development of algorithms that allow computers to learn from and make predictions or decisions based on data.',
         belongsToDeck: 'Introduction to Machine Learning',
         belongsToDeckId: '1'
+    },
+    {
+        id: 2,
+        question: 'Second is Machine Learning?',
+        answer: 'Machine Learning is a subset of artificial intelligence that focuses on the development of algorithms that allow computers to learn from and make predictions or decisions based on data.',
+        belongsToDeck: 'Introduction to Machine Learning',
+        belongsToDeckId: '1'
+    },
+    {
+        id: 3,
+        question: 'Third is Machine Learning?',
+        answer: 'Machine Learning is a subset of artificial intelligence that focuses on the development of algorithms that allow computers to learn from and make predictions or decisions based on data.',
+        belongsToDeck: 'Introduction to Machine Learning',
+        belongsToDeckId: '2'
+    },
+    {
+        id: 4,
+        question: 'Third is Machine Learning?',
+        answer: 'Machine Learning is a subset of artificial intelligence that focuses on the development of algorithms that allow computers to learn from and make predictions or decisions based on data.',
+        belongsToDeck: 'Introduction to Machine Learning',
+        belongsToDeckId: '2'
     }
 ]

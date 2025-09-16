@@ -1,3 +1,4 @@
+/* ----------------- Library page styles --------------- */
 .decklist{
   /* sizing */
   width: calc(100% - 300px);
@@ -17,8 +18,11 @@
   justify-content: space-between;
   align-items: center;
 
+  /* sizing */
+  height: 10vh;
+  box-sizing: border-box;
+
   /* offsets */
-  margin-bottom: 32px;
   padding-bottom: 16px;
 }
 
@@ -72,29 +76,30 @@
 .deck-container{
   /* nature */
   display: grid;
-  grid-template-columns: repeat(auto-fill, 350px);
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, 33.3%);
+  grid-template-rows: repeat(auto-fill, 220px);
 
   /* sizing */ 
-  max-width: 90%;
-  min-height: 50vh;
-
-  /* offsets */
-  margin: 0 auto;
+  max-width: 100%;
+  height: 90vh;
 }
 
 .deck-card{
   /* nature */  
+  position: relative;
   overflow: hidden;
 
   /* sizing */
-  width: 300px;
-  height: 180px;
+  width: 95%;
+  height: 200px;
+  box-sizing: border-box;
 
   /* offsets */
-  padding: 24px;
+  margin: 0 auto;
+  padding: 10px;
+  
   /* decor */  
-  background-color: var(--light);
+  background-color: rgba(255, 255, 255, 0.498);
   border: 1px solid var(--secondary);
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -143,19 +148,21 @@
   gap: 2px;
 }   
 
-.deck-tilte{
+.deck-title{
   /* nature */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* sizing */
+  min-height: 30px;
 
   /* offsets */  
   margin: 0;
 
   /* decor */  
-  color: var(--dark);
-  font-size: 14px;
+  color: var(--secondary);
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.4;
 }
@@ -180,178 +187,217 @@
 
 .deck-card-count{
   /* nature */
+  position: absolute;
+
   /* sizing */
+  width: fit-content;
+  box-sizing: border-box;
+
   /* offsets */
+  bottom: 0;
+  right: 0;
+  margin: 0;
   padding: 4px 12px; 
   text-align: right;
 
   /* decor */  
+  background-color: rgba(72, 72, 72, 0.057);
   color: var(--dark);
   font-size: 12px;
   font-weight: 500;
-  border-radius: 16px;
+  border-radius: 16px 0 16px 16px;
 }
 
-deck-link {
-    /* nature */
-  /* sizing */
-  /* offsets */
-  /* decor */
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    height: 100%;
-  }
-  
-  .deck-link:hover {
-      /* nature */
-  /* sizing */
-  /* offsets */
-  /* decor */
-    text-decoration: none;
-  }
-
-  /* Modal Styles */
+/*------------------ Modal Styles -------------------*/
 .modal-overlay {
-    /* nature */
-  /* sizing */
-  /* offsets */
+  /* nature */  
+  display: flex;
+  z-index: 1000;
+  position: fixed;
+
+  /* offsets */  
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  
   /* decor */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background: white;
-    border-radius: 12px;
-    padding-right: 30px;
-    width: 900px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    border-bottom: 1px solid #e2e8f0;
-  }
-  
-  .modal-header h3 {
-    margin: 0;
-    color: #2d3748;
-  }
-  
-  .modal-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #718096;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-close:hover {
-    color: #4a5568;
-  }
-  
-  /* Form Styles */
-  .deck-form {
-    padding: 1.5rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #4a5568;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-  }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: #4299e1;
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-  }
-  
-  .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  
-  .cancel-btn {
-    padding: 0.75rem 1.5rem;
-    background-color: #e2e8f0;
-    color: #4a5568;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-  }
-  
-  .cancel-btn:hover {
-    background-color: #cbd5e0;
-  }
-  
-  .create-btn {
-    padding: 0.75rem 1.5rem;
-    background-color: #4299e1;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-  }
-  
-  .create-btn:hover {
-    background-color: #3182ce;
-  }
-  
-  .create-btn:disabled {
-    background-color: #cbd5e0;
-    cursor: not-allowed;
-  }
-  
-  /* Category badge */
-  .deck-category {
-    background-color: #e9d8fd;
-    color: #553c9a;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-right: 0.75rem;
-  }
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  /* nature */
+  overflow-y: auto;
+
+  /* sizing */
+  width: 900px;
+  max-height: 90vh;
+
+  /* offsets */
+  padding-right: 30px;
+
+  /* decor */
+  background: var(--bright);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  /* nature */
+  display: flex;
+
+  /* offsets */
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.modal-header h3 {
+  /* offstes */
+  margin: 0;
+
+  /*decor */
+  color: var(--dark);
+}
+
+.modal-close {
+  /* nature */    
+  display: flex;
+
+  /* sizing */
+  width: 30px;
+  height: 30px;
+
+  /* offsets */   
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+
+  /* decor */
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #718096;
+}
+
+.modal-close:hover {
+  /* decor */
+  color: #4a5568;
+}
+
+/*--- Text Form Styles ---*/
+.deck-form {
+  /* offsets */
+  padding: 1.5rem;
+}
+
+.form-group {
+  /* offsets */
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  /* nature */
+  display: block;
+
+  /* offsets */
+  margin-bottom: 0.5rem;
+
+  /* decor */
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-group input,
+.form-group textarea {
+  /* sizing */
+  width: 100%;
+
+  /* offsets */
+  padding: 0.75rem;
+
+  /* decor */
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  /* decor */
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.form-actions {
+  /* nature */
+  display: flex;
+
+  /* offsets */
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancel-btn {
+  /* sizing */
+  padding: 0.75rem 1.5rem;
+
+  /* decor */
+  background-color: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+  /* decor */
+  background-color: #cbd5e0;
+}
+
+.create-btn {
+  /* offsets */
+  padding: 0.75rem 1.5rem;
+
+  /* decor */
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.create-btn:hover {
+  /* decor */
+  background-color: #3182ce;
+}
+
+.create-btn:disabled {
+  /* decor */
+  background-color: #cbd5e0;
+  cursor: not-allowed;
+}
+
+/* Category badge */
+.deck-category {
+  /* offsets */
+  padding: 0.25rem 0.75rem;
+
+  /* decor */
+  background-color: #e9d8fd;
+  color: #553c9a;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right: 0.75rem;
+}

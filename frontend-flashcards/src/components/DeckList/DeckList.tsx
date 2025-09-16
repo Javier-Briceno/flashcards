@@ -16,7 +16,7 @@ interface DeckListProps {
     onCreateDeck: (deckData: {title: string, description: string, category: string}) => void;
 }
 //Main DeckList component function
-const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
+const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
     //State for managing modal visibility and form inputs
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newDeckName, setNewDeckName] = useState('');
@@ -69,14 +69,12 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps)=>{
                         onClick = {() => onSelectDeck(deck.id)}    //Handle click on deck card
                     >
                         {/* //Link to navigate to the deck's detail page */}
-                        <Link to = {`/decks/${deck.id}`} className = "deck-link">  
-                        <div className = "deck-content">
-                            <h3 className = "deck-title">{deck.title}</h3>
-                            <p className = "deck-description">{deck.description}</p>
-                            <div className = "deck-meta">
-                              <p className = "deck-card-count">{deck.cardCount} cards</p>
+                        <Link to = {`/decks/${deck.id}`}>  
+                            <div className = "deck-content">
+                                <h3 className = "deck-title">{deck.title}</h3>
+                                <p className = "deck-description">{deck.description}</p>
+                                <p className = "deck-card-count">{deck.cardCount} cards</p>
                             </div>
-                        </div>
                         </Link>
                     </div>
                 ))}
