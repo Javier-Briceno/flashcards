@@ -45,12 +45,24 @@ export function useDeckDetails(deckId: string) {
     setLoading(true);
     try {
       const data = await getDeck(deckId);
+      console.log("here is Data",data);
+      if (!data) {
+        throw new Error('No data returned from API');
+      }
       const uiDeck = mapDeck(data.deck);
+      console.log("here is uiDeck ",uiDeck);
       setDeck(uiDeck);
-      setChildren(data.children.map(mapDeck));
-      setFlashcards(data.flashcards.map(c => mapCard(c, uiDeck.title)));
+      const childDecks = data.children ? data.children.map(mapDeck) : [];
+      setChildren(childDecks);
+      const deckFlashcards = data.flashcards
+        ? data.flashcards.map(c => mapCard(c, uiDeck.title))
+        : [];
+      console.log("here are the flashcards",deckFlashcards);
+      setFlashcards(deckFlashcards);
       setError(null);
-    } catch (e) { setError(e); }
+    } catch (e) { 
+      console.error("Error in useDeckDetails:", e);
+      setError(e); }
     finally { setLoading(false); }
   }, [deckId]);
 

@@ -9,6 +9,7 @@ import FlashcardList from './components/Deck'
 import type { Flashcard } from './components/Deck'
 import NavBar from './components/NavBar/NavBar'
 import { useDecks, useDeckDetails } from './hooks/useDecks';
+import { createFlashcard } from './api/flashcards';
 
 function App(){
   return (
@@ -48,23 +49,35 @@ function Library(){
 
 function Deck(){
   const { deckId } = useParams();
-  const { deck, flashcards, loading, error } = useDeckDetails(deckId!);
+  const { deck, flashcards, loading, error, refresh } = useDeckDetails(deckId!);
+  //const navigate = useNavigate();
   if (loading) return <p>Loading…</p>;
   if (error) return <p>Failed to load deck.</p>;
   if (!deck) return <p>Deck not found.</p>;
 
-  const currentDeck = sampleDecks.find(deck => deck.id === deckId);
-  const handleCreateFlashcard = () => { /* open modal → call createFlashcard API, then refresh() */ };
-  const handleSelectFlashcard = (id: string) => { /* navigate or toggle flip, your choice */ };
+   const handleCreateFlashcard = async (flashcardData: {front: string, back:string}) => {
+      //const currentDeck = sampleDecks.find(deck => deck.id === deckId);
+      /* open modal → call createFlashcard API, then refresh() */ 
+      try {
+         console.log('Creating flashcard:', flashcardData);
+      //    setTimeout(() => {
+      //      refresh();
+      //      console.log('Flashcard created and list refreshed');
+      //  }, 500);
+            await createFlashcard(deckId!, flashcardData);
+            await refresh();
+            console.log('Flashcard created and list refreshed');
+     }catch (error){
+       console.log('Error creating flashcard:', error);
+       alert('Failed to create flashcard. Please try again.');
+       }
+     };
+   const handleSelectFlashcard = (id: string) => { /* navigate or toggle flip, your choice */ };
 
   return (
     <div className="deck">
-      <div className="deck-header">
-        <h2>{deck.title}</h2>
-        {deck.description && <p>{deck.description}</p>}
-      </div>
       <FlashcardList
-        currentDeck={currentDeck!}
+        currentDeck={deck}
         flashcards={flashcards}
         onCreateFlashcard={handleCreateFlashcard}
         onSelectFlashcard={handleSelectFlashcard}

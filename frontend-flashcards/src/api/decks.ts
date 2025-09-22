@@ -1,4 +1,4 @@
-// src/api/decks.ts
+//src/api/decks.ts
 import { request } from './client';
 import type { ApiDeck, ApiFlashcard } from '../types/api';
 
@@ -24,3 +24,20 @@ export function createDeck(payload: { name: string; category?: string; parent_de
 export function getDeck(deckId: string | number) {
   return request<{ deck: ApiDeck; children: ApiDeck[]; flashcards: ApiFlashcard[] }>(`/decks/${deckId}`);
 }
+
+//handle creating a new flashcard in a specific deck
+// export async function createFlashcard(deckId: string, flashcardData: { question: string; answer: string }) {
+//   const response = await fetch(`/api/decks/${deckId}/flashcards`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(flashcardData),
+//   });
+  
+//   if (!response.ok) {
+//     throw new Error('Failed to create flashcard');
+//   }
+  
+//   return response.json();
+// }
