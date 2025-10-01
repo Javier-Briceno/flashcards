@@ -36,7 +36,7 @@
 
     /* sizing */
     width: 95%;    
-    height: 60px;
+    height: 40px;
 
     /* offsets */
     margin: 10px auto;
@@ -46,10 +46,10 @@
 .searchbar{
     /* sizing */
     width: 100%;
+    box-sizing: border-boxs;
 
     /* offsets */
-    padding: 20px;
-    line-height: 100%;
+    padding: 10px;
 
     /* decor */
     color: rgb(60, 60, 60);
@@ -59,7 +59,11 @@
 }
 
 .start-learning {
+    /* sizing */
+    width: 180px;
+
     /* offsets */
+    margin: 0 8px;
     padding: 10px 20px;
 
     /* decor */
@@ -68,13 +72,16 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(98, 255, 0, 0.3);
 }
 
 .create-a-flashcard{
+    /* sizing */
+    width: 260px;
+
     /* offsets */
     padding: 10px 20px;
 
@@ -84,7 +91,7 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(114, 195, 254, 0.3);
@@ -224,4 +231,86 @@
     font-size: 16px;
     color: #666;
 
+}
+
+/*------------------ Modal Styles -------------------*/
+
+.overlay-2 {
+
+    .modal-content {
+        /* nature */
+        display: flex;
+
+        /* sizing */
+        width: 40vw;
+        min-height: 70vh;
+
+        /* offsets */
+        padding: 0;
+        flex-direction: column;
+
+        /* decor */
+        background-color: var(--bright);
+        border-radius: 20px;
+    }
+
+    div {
+        /* sizing */
+        width: 100%;
+        box-sizing: border-box;
+
+        /* offsets */
+        padding: 20px;
+    }
+
+    .modal-header,
+    .modal-actions {
+        /* sizing */
+        height: 10%;
+    }
+
+    .modal-header {
+        /* decor */
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .form-group {
+        /* siziing */
+        height: 28.15vh;
+    }
+
+    .form-group textarea {
+        /* sizing */
+        resize: none;
+        width: 100%;
+        min-height: 90%;
+
+        /* decor */
+        border-radius: 10px;
+    }
+
+    .modal-actions {
+        /* nature */
+        display: flex;
+
+        /* offsets */
+        padding: 10px;
+        justify-content: flex-end;
+    }
+
+    .cancel-btn {
+        /* offsets */
+        margin-right: 20px;
+
+        /* decor */
+        background-color: var(--bright);
+        font-weight: 600;
+    }
+
+    .create-btn {
+        /* decor */
+        background-color: var(--accent);
+        font-weight: 600;
+    }
 }

@@ -1,6 +1,6 @@
 import './DeckList.css';
 import { Link } from 'react-router-dom';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 //Define the structure of a Deck object
 export interface Deck{
     id: string;
@@ -22,7 +22,7 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
     const [newDeckName, setNewDeckName] = useState('');
     const [newDeckDescription, setNewDeckDescription] = useState('');
     const [newDeckCategory, setNewDeckCategory] = useState('');
-    //Function to handle the create button click - opens the modak
+    //Function to handle the create button click - opens the modal
     const handleCreateDeck = () => {
         setIsModalOpen(true);
     };
@@ -38,7 +38,7 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
     //Function to handle form submission
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault(); //Prevent default form submission behavior
-
+        console.log(newDeckName);
         //Only proceed if deck name is not empty
         if(newDeckName.trim()){
             onCreateDeck({
@@ -81,9 +81,9 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
             </div>
 
             {/* Modal for creating a new deck */}
-            {isModalOpen &&(
+            {isModalOpen && (
                 //Overlay that covers the entire screen
-                <div className="modal-overlay" onClick={handleModalClose}>
+                <div className="modal-overlay overlay-1" onClick={handleModalClose}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
                             <h3>Create New Deck</h3>
@@ -95,8 +95,8 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
                                 <input
                                     type="text"
                                     id="deck-name"
-                                    //value={newDeckName}
-                                    //onChange={(e) => setNewDeckName(e.target.value)} //Update state on input change
+                                    value={newDeckName}
+                                    onChange={(e) => setNewDeckName(e.target.value)} //Update state on input change
                                     placeholder="Enter deck name"
                                     required
                                     autoFocus
@@ -109,8 +109,8 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
                                 <input
                                     type="text"
                                     id="deck-category"
-                                    //value={newDeckCategory}
-                                    //onChange={(e) => setNewDeckCategory(e.target.value)}
+                                    value={newDeckCategory}
+                                    onChange={(e) => setNewDeckCategory(e.target.value)}
                                     placeholder="Enter category (optional)"
                                 />
                             </div>
@@ -120,8 +120,8 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
                                 <label htmlFor="deck-description">Description</label>
                                 <textarea
                                     id="deck-description"
-                                    //value={newDeckDescription}
-                                    //onChange={(e) => setNewDeckDescription(e.target.value)}
+                                    value={newDeckDescription}
+                                    onChange={(e) => setNewDeckDescription(e.target.value)}
                                     placeholder="Enter description (optional)"
                                     rows={3} // Set initial visible rows
                                 />
