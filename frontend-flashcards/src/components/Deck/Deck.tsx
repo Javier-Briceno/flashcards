@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Deck } from '../DeckList';
 import './Deck.css';  // Importing CSS for styling
+
 export interface Flashcard{   
     id: number;
     question: string;
@@ -12,41 +13,48 @@ export interface Flashcard{
 interface DeckProps {  
     currentDeck: Deck;
     flashcards: Flashcard[];
-    onSelectFlashcard:(FlashcardId: string) => void;
-    onCreateFlashcard:(Front: string, Back: string) => void;
+    onSelectFlashcard:(flashcardId: string) => void;
+    onCreateFlashcard: (flashcard: { front: string; back: string }) => void;
 }
 
-const FlashCardList = ({currentDeck, flashcards, onSelectFlashcard, onCreateFlashcard}: DeckProps) => { 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [newFlashcardFront, setNewFlashcardFront] = useState('');
-    const [newFlashcardBack, setNewFlashcardBack] = useState('');
+const FlashcardList = ({currentDeck, flashcards, onSelectFlashcard, onCreateFlashcard}: DeckProps) => {  
+
+    const[isModalOpen, setIsModalOpen ] = useState(false);
+    const[newFlashcardQuestion, setNeWFlashcardQuestion] = useState('');
+    const[newFlashcardAnswer, setNewFlashcardAnswer] = useState('');
 
     const handleCreateFlashcard = () => {
         setIsModalOpen(true);
-    }
-
-    const handleModalClose = () => {
+    };
+    const handleModalClose  = () => {
         setIsModalOpen(false);
-        setNewFlashcardFront('');
-        setNewFlashcardBack('');
-    }
-
-    const handleSubmit = (e: React.FormEvent) => {
+        setNeWFlashcardQuestion('');
+        setNewFlashcardAnswer('');
+    };
+    const handleCreateCardSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const trimmedFront = newFlashcardFront.trim();
-        const trimmedBack = newFlashcardBack.trim();
-        if (trimmedFront && trimmedBack) {
-            onCreateFlashcard(trimmedFront, trimmedBack);
-            handleModalClose();
+        if(newFlashcardQuestion.trim() && newFlashcardAnswer.trim()){
+            onCreateFlashcard({
+                front: newFlashcardQuestion.trim(),
+                back: newFlashcardAnswer.trim(),
+            });
+            setNeWFlashcardQuestion('');
+            setNewFlashcardAnswer('');
+            setIsModalOpen(false);
         }
-    }
-
+    };
     return (
         <>
             <div className = 'name-of-the-Deck'> 
                 <div className="deck-header">
                     <h2>{currentDeck.title}</h2>
                     <p>{currentDeck.description}</p>
+                    
+                    <div className="deck-meta">
+                        <span className="card-count">{flashcards.length} cards</span>
+                        {currentDeck.category && 
+                        <span className="deck-category">{currentDeck.category}</span>}
+                    </div>
                 </div> 
                 <div className = 'deck-actions'>
                     <input type = "text" placeholder= "search (not working)" className = 'searchbar'/>
@@ -54,36 +62,82 @@ const FlashCardList = ({currentDeck, flashcards, onSelectFlashcard, onCreateFlas
                     <button onClick = {handleCreateFlashcard} className = 'create-a-flashcard'>Create a new Flashcard</button>
                 </div>   
             </div>
-            <div className = 'flashcard-container'>
-                {flashcards.map(flashcard =>(
-                    <div
-                        key = {flashcard.id}
-                        className = 'flashcard-card'
-                        onClick = {() => onSelectFlashcard(flashcard.id.toString())}
-                    >
-                        <div className ='flashcard-content'>
-                            <p className = 'flashcard-question'>{flashcard.question}</p>
-                            <p className = 'flashcard-answer'>{flashcard.answer}</p>
+            {isModalOpen && (
+                <div className="modal-overlay" onClick={handleModalClose}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-header">
+                            <h3>Create New Flashcard</h3>
+                            <button className="modal-close" onClick={handleModalClose}>X</button>
                         </div>
+                        <form onSubmit = {handleCreateCardSubmit} className="flashcard-form">
+                            <div className="form-group">
+                                <label htmlFor="flashcard-question">Question</label>
+                                <input
+                                    type="text"
+                                    id = "flashcard-question"
+                                    value = {newFlashcardQuestion}
+                                    onChange = {(e) => setNeWFlashcardQuestion(e.target.value)}
+                                    placeholder = "Enter the question"
+                                    required
+                                    autoFocus
+                                />
+                            </div>
+                            <div className = "form-group">
+                                <label htmlFor="flashcard-answer">Answer</label>
+                                <textarea
+                                    id="flashcard-answer"
+                                    value={newFlashcardAnswer}
+                                    onChange={(e) => setNewFlashcardAnswer(e.target.value)}
+                                    placeholder="Enter the answer"
+                                    required
+                                    rows={4}
+                                />
+                            </div>
+
+                            <div className="form-actions">
+                                <button type="button" onClick={handleModalClose} className="cancel-btn">Cancel</button>
+                                <button type="submit" className="create-btn">Create Flashcard</button>
+                            </div>
+                        </form>
                     </div>
-                ))}
+                </div>
+            )}
+            <div className = 'flashcard-container'>
+                {(flashcards.length === 0) ? (
+                    <div className="empty-state">
+                        <p>No Flashcard here. Please create your first one</p>
+                    </div>
+                ):(
+                    flashcards.map(flashcard => (
+                        <div
+                            key = {flashcard.id}
+                            className = 'flashcard-card'
+                            onClick = {() => onSelectFlashcard(flashcard.id.toString())}
+                        >
+                            <div className ='flashcard-content'>
+                                <p className = 'flashcard-question'>{flashcard.question}</p>
+                                <p className = 'flashcard-answer'>{flashcard.answer}</p>
+                            </div>
+                        </div>
+                ))
+            )}
             </div>
             {isModalOpen && (
                 <div onClick = {handleModalClose} className = "modal-overlay overlay-2">
                     <div onClick = {(e) => {e.stopPropagation()}} className = "modal-content">
                         <div className = "modal-header">Create a flashcard</div>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleCreateCardSubmit}>
                             <div className = "form-group">
                                 <label>Front of the card:</label><br/>
                                 <textarea 
-                                    onChange = {(e) => {setNewFlashcardFront(e.target.value)}}
+                                    onChange = {(e) => {setNeWFlashcardQuestion(e.target.value)}}
                                     placeholder = "Question..."
                                 />
                             </div>
                             <div className = "form-group">
                                 <label>Back of the card:</label><br/>
                                 <textarea 
-                                    onChange = {(e) => {setNewFlashcardBack(e.target.value)}}
+                                    onChange = {(e) => {setNewFlashcardAnswer(e.target.value)}}
                                     placeholder = "Answer..."
                                 />
                             </div>
@@ -97,6 +151,6 @@ const FlashCardList = ({currentDeck, flashcards, onSelectFlashcard, onCreateFlas
             )}
         </>
     )
-}
+};
 //exporting the FlashCardList component as the default export
-export default FlashCardList;
+export default FlashcardList;
