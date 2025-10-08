@@ -51,7 +51,7 @@ const FlashcardList = ({currentDeck, flashcards, onSelectFlashcard, onCreateFlas
                     <p>{currentDeck.description}</p>
                     
                     <div className="deck-meta">
-                        <span className="card-count">{flashcards.length} cards</span>
+                        <span className="card-count">{flashcards.length} cards, </span>
                         {currentDeck.category && 
                         <span className="deck-category">{currentDeck.category}</span>}
                     </div>
@@ -62,6 +62,7 @@ const FlashcardList = ({currentDeck, flashcards, onSelectFlashcard, onCreateFlas
                     <button onClick = {handleCreateFlashcard} className = 'create-a-flashcard'>Create a new Flashcard</button>
                 </div>   
             </div>
+            {/* Modal for creating a new flashcard */}
             {isModalOpen && (
                 <div className="modal-overlay" onClick={handleModalClose}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>

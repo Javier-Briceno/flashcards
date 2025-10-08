@@ -74,6 +74,12 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
                                 <h3 className = "deck-title">{deck.title}</h3>
                                 <p className = "deck-description">{deck.description}</p>
                                 <p className = "deck-card-count">{deck.cardCount} cards</p>
+                                <div 
+                                    className = "delete-deck-button"   
+                                    onClick = {() => {}}
+                                >
+                                    🗑
+                                </div>
                             </div>
                         </Link>
                     </div>

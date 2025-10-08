@@ -186,7 +186,7 @@
   align-items:end;
 }
 
-.deck-card-count{
+.deck-card-count {
   /* nature */
   position: absolute;
 
@@ -208,6 +208,42 @@
   font-weight: 500;
   border-radius: 16px 0 16px 16px;
 }
+
+.delete-deck-button {
+  /* nature */
+  position: absolute;
+
+  /* sizing */
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+
+  /* offsets */
+  top: 0;
+  right: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 27px;
+
+  /* decor */
+  border: 2px solid red;
+  color: red;
+  font-size: 20px;
+  border-radius: 10px;
+  transition: 0.1s;
+  opacity: 0;
+}
+
+.deck-card:hover .delete-deck-button {
+  opacity: 1;
+}
+
+.delete-deck-button:hover {
+  color: white;
+  background-color: red;
+}
+
+
 
 /*------------------ Modal Styles -------------------*/
 .modal-overlay {

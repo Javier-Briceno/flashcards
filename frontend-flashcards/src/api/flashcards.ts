@@ -1,6 +1,7 @@
-// src/api/flashcards.ts
 import { request } from './client';
 import type { ApiFlashcard } from '../types/api';
+
+// reguest() is from client.ts
 
 export function createFlashcard(deckId: string | number, payload: { front: string; back: string; image_url?: string | null }) {
   return request<ApiFlashcard>(`/decks/${deckId}/flashcards`, { method: 'POST', body: JSON.stringify(payload) });

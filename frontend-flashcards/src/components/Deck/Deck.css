@@ -30,6 +30,14 @@
     color: var(--dark);
 }
 
+.deck-meta {
+    /* offsets */ 
+    margin-left: 30px;
+
+    /* decor */
+    color: gray;
+}
+
 .deck-actions {
     /* nature */
     display: flex;
