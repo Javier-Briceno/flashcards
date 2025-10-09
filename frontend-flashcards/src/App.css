@@ -24,7 +24,9 @@
   position: absolute;
   top: 45vh;
   left: 45vw;
-  animation: spinMerightNowBabyRightNow 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite alternate;
+  animation: 
+    rainbow 0.3s linear infinite alternate, 
+    spinMerightNowBabyRightNow 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite alternate;
 }
   @keyframes spinMerightNowBabyRightNow {
     from {
@@ -34,6 +36,18 @@
     to {
       transform: rotate3d(1,4,3, 720deg) translateY(80px) scale(1.5);
       text-shadow: #000000 20px 30px 40px;
+    }
+  }
+
+  @keyframes rainbow {
+    0% {
+      color: red;
+    }
+    33% {
+      color: rgb(4, 255, 0);
+    }
+    66% {
+      color: rgb(17, 0, 255);
     }
   }
 

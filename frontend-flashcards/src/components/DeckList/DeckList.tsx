@@ -14,9 +14,10 @@ interface DeckListProps {
     decks: Deck[];
     onSelectDeck: (deckId: string) => void;
     onCreateDeck: (deckData: {title: string, description: string, category: string}) => void;
+    onDeleteDeck: (deckId: string) => void;
 }
 //Main DeckList component function
-const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
+const DeckList = ({decks, onSelectDeck, onCreateDeck, onDeleteDeck}: DeckListProps) => {
     //State for managing modal visibility and form inputs
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newDeckName, setNewDeckName] = useState('');
@@ -66,6 +67,7 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
                     <div 
                         key ={deck.id}
                         className = 'deck-card'
+                        id = {deck.id}
                         onClick = {() => onSelectDeck(deck.id)}    //Handle click on deck card
                     >
                         {/* //Link to navigate to the deck's detail page */}
@@ -74,14 +76,23 @@ const DeckList = ({decks, onSelectDeck, onCreateDeck}: DeckListProps) => {
                                 <h3 className = "deck-title">{deck.title}</h3>
                                 <p className = "deck-description">{deck.description}</p>
                                 <p className = "deck-card-count">{deck.cardCount} cards</p>
-                                <div 
-                                    className = "delete-deck-button"   
-                                    onClick = {() => {}}
-                                >
-                                    🗑
-                                </div>
                             </div>
                         </Link>
+                        <div 
+                            className = "delete-deck-button"   
+                            onClick = {(e) => {
+                                e.stopPropagation();
+                                if(confirm("damn bruh u be fr deleting ts?")) {
+                                    onDeleteDeck(deck.id);
+
+                                    // animation
+                                    const deletedDiv = document.getElementById(deck.id);
+                                    deletedDiv?.classList.add('fall-animation')
+                                }
+                            }}
+                        >
+                            🗑
+                        </div>
                     </div>
                 ))}
             </div>

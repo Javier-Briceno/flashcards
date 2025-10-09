@@ -1,11 +1,12 @@
-// src/hooks/useDecks.ts
 import { useEffect, useState, useCallback } from 'react';
-import { listDecks, createDeck, getDeck } from '../api/decks';
+import { listDecks, createDeck, getDeck, deleteDeck } from '../api/decks';
 import { mapDeck, mapCard } from '../types/api';
 import type { Deck } from '../types/Deck';
 import type { Flashcard } from '../types/Flashcard';
 
+// Hands over the functionality to alter the deck table from the backend
 export function useDecks() {
+  // Result are stored in states
   const [decks, setDecks] = useState<Deck[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
@@ -31,9 +32,17 @@ export function useDecks() {
     return created;
   }, []);
 
-  return { decks, loading, error, refresh, onCreateDeck };
+  const onDeleteDeck = useCallback(async (deckId: string) => {
+    const rest = await deleteDeck(deckId);
+
+    return rest;
+  }, []);
+
+  
+  return { decks, loading, error, refresh, onCreateDeck, onDeleteDeck };
 }
 
+// Hands over the data about the decks
 export function useDeckDetails(deckId: string) {
   const [deck, setDeck] = useState<Deck | null>(null);
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);

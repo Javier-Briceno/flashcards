@@ -83,6 +83,10 @@
   /* sizing */ 
   max-width: 100%;
   height: 90vh;
+  box-sizing: border-box;
+
+  /* offsets */
+  padding-top: 5px;
 }
 
 .deck-card{
@@ -232,6 +236,7 @@
   border-radius: 10px;
   transition: 0.1s;
   opacity: 0;
+  cursor: default;
 }
 
 .deck-card:hover .delete-deck-button {
@@ -243,6 +248,45 @@
   background-color: red;
 }
 
+.fall-animation {
+  position: relative;
+  animation: fall 1.3s ease-in forwards;
+}
+
+@keyframes fall {
+  25% {
+    transform: 
+      translateY(-120px)
+      translateX(50px)
+      rotate3d(2, 3, 1, 190deg)
+      scale(1.3);
+  }
+  35% {
+    transform: 
+      translateY(-110px)
+      translateX(55px)
+      rotate3d(2, 3, 1, 200deg)
+      scale(1.2);
+    opacity: 1;
+  }
+  80% {
+    transform: 
+      translateY(700px)
+      translateX(80px)
+      rotate3d(2, 3, 1, 400deg)
+      scale(0.7);
+      opacity: 0;
+  }
+  90% {
+    display: none;
+    max-width: 0;
+  }
+  100% {
+    display: none;
+    position: absolute;
+  }
+
+}
 
 
 /*------------------ Modal Styles -------------------*/

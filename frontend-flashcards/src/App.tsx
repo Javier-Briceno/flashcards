@@ -33,7 +33,7 @@ function HomePage(){
 }
 
 function Library(){
-  const { decks, loading, error, onCreateDeck } = useDecks();
+  const { decks, loading, error, onCreateDeck, onDeleteDeck } = useDecks();
   const navigate = useNavigate();
   if (loading) return <p>Loading…</p>;
   if (error) return <p>Failed to load decks.</p>;
@@ -43,6 +43,7 @@ function Library(){
       decks={decks}
       onSelectDeck={(deckId) => navigate(`/decks/${deckId}`)}
       onCreateDeck={onCreateDeck}
+      onDeleteDeck={onDeleteDeck}
     />
   );
 }

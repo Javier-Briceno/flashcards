@@ -26,6 +26,11 @@ export function createDeck(payload: { name: string; category?: string; parent_de
   return request<ApiDeck>('/decks', { method: 'POST', body: JSON.stringify(payload) });
 }
 
+export function deleteDeck(deckId: string | number) {
+  console.log("goofy ahh");
+  return request<ApiDeck>(`/decks/${deckId}`, { method: 'DELETE' });
+}
+
 /** Returns:
  * {
  *   deck: ApiDeck,
